@@ -1,0 +1,19 @@
+{
+  "name": "notes-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "build": "esbuild index.js --bundle  --outfile=bundle.js --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "build": "^0.1.4",
+    "esbuild": "^0.14.11",
+    "jest": "^27.4.7"
+  },
+  "devDependencies": {},
+  "description": ""
+}
