@@ -13,6 +13,10 @@ class NotesModel {
   reset(){
     return this.notes = []
   }
+
+  setNotes(notes) {
+    return this.notes = notes;
+  }
 }
 
 module.exports = NotesModel;

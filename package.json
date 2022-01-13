@@ -12,8 +12,8 @@
   "dependencies": {
     "build": "^0.1.4",
     "esbuild": "^0.14.11",
-    "jest": "^27.4.7"
+    "jest": "^27.4.7",
+    "jest-fetch-mock": "^3.0.3"
   },
-  "devDependencies": {},
   "description": ""
 }

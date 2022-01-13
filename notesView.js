@@ -1,8 +1,10 @@
+const NotesApi = require("./notesApi");
 const NotesModel = require("./notesModel");
 
 class NotesView {
-  constructor(model=NotesModel) {
+  constructor(model=NotesModel, api=NotesApi) {
     this.model = model; // dependency inject the model
+    this.api = api;
 
     document.querySelector('#add-note-button').addEventListener('click', () => {
       document.querySelectorAll('.note').forEach((note) => {
