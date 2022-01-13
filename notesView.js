@@ -3,6 +3,15 @@ const NotesModel = require("./notesModel");
 class NotesView {
   constructor(model=NotesModel) {
     this.model = model; // dependency inject the model
+
+    document.querySelector('#add-note-button').addEventListener('click', () => {
+      document.querySelectorAll('.note').forEach((note) => {
+        note.remove();
+      })
+      this.model.addNotes(document.querySelector('#note-input').value);
+      this.displayNotes();
+      document.querySelector('#note-input').value = '';
+    });
   }
 
   displayNotes() {

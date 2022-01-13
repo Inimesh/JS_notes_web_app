@@ -25,5 +25,26 @@ describe('NotesView', () => {
     })
     
   })
+
+  describe('', () => {
+    test('should see added notes when button clicked', () => {
+      document.body.innerHTML = fs.readFileSync('./index.html');
+
+      const notesModel = new NotesModel();
+      const notesView = new NotesView(notesModel);
+
+      const button = document.querySelector('#add-note-button');
+      const note_input = document.querySelector('#note-input');
+
+      note_input.value = "Hi there!" // This might not work
+      button.click();
+      button.click();
+
+      expect(document.querySelectorAll('div.note')[0].textContent).toEqual("Hi there!") // This might not work
+      expect(document.querySelectorAll('div.note').length).toEqual(2) // This might not work
+      
+    })
+
+  })
   
 })

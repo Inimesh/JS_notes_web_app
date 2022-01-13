@@ -32,6 +32,14 @@
       var NotesView2 = class {
         constructor(model = NotesModel2) {
           this.model = model;
+          document.querySelector("#add-note-button").addEventListener("click", () => {
+            document.querySelectorAll(".note").forEach((note) => {
+              note.remove();
+            });
+            this.model.addNotes(document.querySelector("#note-input").value);
+            this.displayNotes();
+            document.querySelector("#note-input").value = "";
+          });
         }
         displayNotes() {
           this.model.getNotes().forEach((str) => {
@@ -50,7 +58,6 @@
   var NotesModel = require_notesModel();
   var NotesView = require_notesView();
   var notesModel = new NotesModel();
-  notesModel.addNotes("This is an example note");
   var notesView = new NotesView(notesModel);
   notesView.displayNotes();
 })();
