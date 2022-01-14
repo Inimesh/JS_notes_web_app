@@ -39,6 +39,19 @@
             callback(data);
           });
         }
+        createNote(url, note_body, callback) {
+          fetch(url, {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              content: note_body
+            })
+          }).then((response) => {
+            return response.json();
+          }).then((data) => {
+            callback(data);
+          });
+        }
       };
       module.exports = NotesApi2;
     }
@@ -50,15 +63,19 @@
       var NotesApi2 = require_notesApi();
       var NotesModel2 = require_notesModel();
       var NotesView2 = class {
-        constructor(model = NotesModel2, api = NotesApi2) {
+        constructor(model = new NotesModel2(), api = new NotesApi2()) {
           this.model = model;
           this.api = api;
           document.querySelector("#add-note-button").addEventListener("click", () => {
             document.querySelectorAll(".note").forEach((note) => {
               note.remove();
             });
-            this.model.addNotes(document.querySelector("#note-input").value);
-            this.displayNotes();
+            const noteToAdd = document.querySelector("#note-input").value;
+            this.api.createNote("http://localhost:3000/notes", noteToAdd, (data) => {
+              this.model.reset();
+              this.model.setNotes(data);
+              this.displayNotes();
+            });
             document.querySelector("#note-input").value = "";
           });
         }
@@ -82,7 +99,6 @@
   var notesModel = new NotesModel();
   var notesApi = new NotesApi();
   var notesView = new NotesView(notesModel, notesApi);
-  notesView.displayNotes();
   notesApi.loadNotes("http://localhost:3000/notes", (notes) => {
     notesModel.setNotes(notes);
     notesView.displayNotes();
